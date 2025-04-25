@@ -9,6 +9,36 @@ function GUI.addMenu(name)
     Menus[name] = {}
 end
 
+function GUI.renameButton(menuName, oldName, newName)
+    if not Menus[menuName] then
+        error("Menu '" .. menuName .. "' does not exist!")
+    end
+
+    for _, button in ipairs(Menus[menuName]) do
+        if button.name == oldName then
+            button.name = newName
+            if menuName == CurrentMenu then
+                GUI.render()
+            end
+            return true
+        end
+    end
+
+    return false
+end
+
+function GUI.centerText(txt, y)
+    local w = term.getSize()
+    local x = math.floor((w - #txt) / 2) + 1
+    if y then
+        term.setCursorPos(x, y)
+    else
+        local _, currentY = term.getCursorPos()
+        term.setCursorPos(x, currentY)
+    end
+    term.write(txt)
+end
+
 function GUI.addButton(menu, name, x1, y1, x2, y2, func)
     if not Menus[menu] then
         error("Menu '" .. menu .. "' does not exist!")
