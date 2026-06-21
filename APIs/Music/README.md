@@ -1,11 +1,12 @@
 ## **Some DFPWM related code since i cba to explain it a million times.**
 
-![image](https://github.com/NotSername/Public-CC-Repo/blob/main/images/7.gif?raw=false)
+![image](https://github.com/NotSername/Public-CC-Repo/blob/main/images/7.jpg?raw=false)
 
 Here some example code
 
 **AudioFister.lua**
-```md
+
+```lua
 local AudioFister = dofile("AudioFister.lua")
 local url = "https://whocares.com" -- url to dropbox or whatever you use for the file
 local path = "whatever.dfpwm" -- the file path
@@ -19,8 +20,12 @@ AudioFister.write(url,trackname) -- skips everything and just puts the file stra
 ```
 
 **DurationChecker**
+
+```md
 DurationChecker requires a bit more knowledge to get to work.
 (or just change every mention of tape.getSamplerate() to 48000 or whatever your samplerate is.)
+```
+
 ```lua
 	local Duration = dofile("DurationChecker.lua")
 
@@ -41,4 +46,19 @@ DurationChecker requires a bit more knowledge to get to work.
 				tape.seek(-tape.getSize())
 			end
     end
+```
+
+**TapeHandler.lua**
+
+```md
+The TapeHandler is where i add custom functions to the tape drive. This includes tape.getSamplerate(). 
+But it also makes sure that tape.play() always uses the right speed for the supported samplerates
+The handler will find the tape drive automatically so there is no need to wrap it yourself.
+```
+
+```lua
+local tape = dofile("TapeHandler.lua")
+
+print(tape.getSamplerate())
+
 ```

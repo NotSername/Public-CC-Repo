@@ -1,7 +1,7 @@
 local AudioFister = {}
 local tape = peripheral.find("tape_drive")
 
-function AudioFister.write(filePath, trackName)
+function AudioFister.write(filePath, trackName, samplerate)
     local w, h = term.getSize()
     local progressY = h - 4
 
@@ -61,7 +61,7 @@ function AudioFister.write(filePath, trackName)
     --term.setCursorPos(1, progressY)
     --term.clearLine()
 
-    tape.setLabel(trackName.." (48000)")
+    tape.setLabel(trackName.." (".. samplerate ..")")
 
     tape.seek(-tapeSize)
     sleep(0.5)
