@@ -11,12 +11,13 @@ local AudioFister = dofile("AudioFister.lua")
 local url = "https://whocares.com" -- url to dropbox or whatever you use for the file
 local path = "whatever.dfpwm" -- the file path
 local trackname = "whatever" -- whatever you wanna call the tape
+local samplerate = "48000"
 
-AudioFister.write(path,trackname) -- this will write the dfpwm file to the tape
+AudioFister.write(path, trackname, samplerate) -- this will write a local dfpwm file to the tape
 
 AudioFister.get(url,path) -- to download the song from whatever source
 
-AudioFister.write(url,trackname) -- skips everything and just puts the file straight on the tape without saving the file
+AudioFister.write(url, trackname, samplerate) -- skips everything and just puts the file straight on the tape without saving the file
 ```
 
 **DurationChecker**
@@ -61,4 +62,19 @@ local tape = dofile("TapeHandler.lua")
 
 print(tape.getSamplerate())
 
+```
+
+**Crack Converter.exe**
+```md
+Crack Converter is a fork of LionRay, tweaked to do more. 
+Fair warning: it's a shady looking .jar file.
+trust it or don't, your call.
+
+It converts `.wav` files to `.dfpwm` for use with ComputerCraft/Computronics speakers.
+
+Pick your input and output files, then set a sample rate - 48000 is the default. 
+Checking **High Quality** runs the audio through a cleanup chain before encoding and bumps the sample rate to 96000, 
+but you can still type in 48000 (or any rate) afterward if you want the quality improvements without the trouble of tape.setspeed().
+
+Picking the right tape size: `size = song duration (seconds) * (sample rate / 48000)`
 ```
